@@ -37,5 +37,7 @@ func _unhandled_input(event):
 		update_zoom(false)
 
 func _process(_delta: float) -> void:
-	position = spaceship.position
+	position = get_global_mouse_position() #spaceship.position
+	var camera_position = spaceship.position + (get_global_mouse_position() - spaceship.position) * 0.2
+	position = camera_position
 	pass
