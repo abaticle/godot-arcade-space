@@ -111,6 +111,7 @@ stream = ExtResource("2_v34wj")
 
 [node name="ThrustParticles" type="GPUParticles2D" parent="VFX"]
 position = Vector2(-9, 0)
+emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_wdqh0")
 texture = ExtResource("3_801gc")
