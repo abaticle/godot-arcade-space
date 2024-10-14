@@ -16,7 +16,8 @@ point_count = 2
 curve = SubResource("Curve_ahr6c")
 
 [sub_resource type="Curve" id="Curve_py104"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.252747), 0.0, 0.0, 0, 0]
+max_value = 2.0
+_data = [Vector2(0, 1.67033), 0.0, 0.0, 0, 0, Vector2(0.253968, 0.175824), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_7oyle"]
@@ -110,7 +111,6 @@ stream = ExtResource("2_v34wj")
 
 [node name="ThrustParticles" type="GPUParticles2D" parent="VFX"]
 position = Vector2(-9, 0)
-emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_wdqh0")
 texture = ExtResource("3_801gc")

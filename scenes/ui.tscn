@@ -11,21 +11,21 @@ offset_bottom = 177.0
 
 [node name="SpeedLabel" type="Label" parent="Container"]
 layout_mode = 2
-text = "speed: "
+text = "Speed: "
 
 [node name="DirectionLabel" type="Label" parent="Container"]
 layout_mode = 2
+text = "Direction:
+"
 
 [node name="FPSLabel" type="Label" parent="Container"]
 layout_mode = 2
 text = "FPS: "
 
-[node name="BackgroundScale" type="Label" parent="Container"]
-layout_mode = 2
-text = "Background scale:"
-
 [node name="Zoom" type="Label" parent="Container"]
 layout_mode = 2
+text = "Zoom:"
 
 [node name="MousePosition" type="Label" parent="Container"]
 layout_mode = 2
+text = "Mouse:"
