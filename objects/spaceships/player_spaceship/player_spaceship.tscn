@@ -1,0 +1,137 @@
+[gd_scene load_steps=13 format=3 uid="uid://bmaoelgfuooxi"]
+
+[ext_resource type="Script" path="res://objects/spaceships/player_spaceship/player_spaceship.gd" id="1_rcvwh"]
+[ext_resource type="AudioStream" uid="uid://usfflyk7myq5" path="res://resources/sounds/thrust.wav" id="2_v34wj"]
+[ext_resource type="Texture2D" uid="uid://c21adw5mevvlm" path="res://resources/dust.png" id="3_801gc"]
+
+[sub_resource type="Gradient" id="Gradient_vpkqd"]
+colors = PackedColorArray(0.699653, 0.699653, 0.699653, 0.341176, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_ahr6c"]
+min_value = -1.0
+_data = [Vector2(0.015873, -0.626374), 0.0, 3.16484, 0, 0, Vector2(0.973545, -0.098901), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sijl5"]
+curve = SubResource("Curve_ahr6c")
+
+[sub_resource type="Curve" id="Curve_py104"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.252747), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7oyle"]
+curve = SubResource("Curve_py104")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wdqh0"]
+direction = Vector3(-1, 0, 0)
+spread = 15.0
+flatness = 0.2
+initial_velocity_min = 50.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_7oyle")
+hue_variation_min = -0.24
+hue_variation_max = -0.2
+hue_variation_curve = SubResource("CurveTexture_sijl5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_44vj6"]
+spread = 15.0
+flatness = 0.2
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_7oyle")
+hue_variation_min = -0.24
+hue_variation_max = -0.2
+hue_variation_curve = SubResource("CurveTexture_sijl5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pfqju"]
+direction = Vector3(0, 1, 0)
+spread = 15.0
+flatness = 0.2
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_7oyle")
+hue_variation_min = -0.24
+hue_variation_max = -0.2
+hue_variation_curve = SubResource("CurveTexture_sijl5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e7mhf"]
+direction = Vector3(0, -1, 0)
+spread = 15.0
+flatness = 0.2
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_7oyle")
+hue_variation_min = -0.24
+hue_variation_max = -0.2
+hue_variation_curve = SubResource("CurveTexture_sijl5")
+
+[node name="SpaceShip" type="RigidBody2D" groups=["spaceships"]]
+position = Vector2(-1, 0)
+angular_damp = 2.0
+script = ExtResource("1_rcvwh")
+engine_power = 700
+spin_power = 1000
+
+[node name="Shape" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-7, -6, 9, 0, -7, 6)
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, -6, 9, 0, -7, 6)
+
+[node name="DirectionLine" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(1, 0.46, 0.46, 1)
+
+[node name="GravityLine" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(0.421739, 0.779949, 0.973268, 1)
+
+[node name="FuturePositions" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0.65834, 0.65834, 0.65834, 1)
+gradient = SubResource("Gradient_vpkqd")
+
+[node name="ThrustSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_v34wj")
+
+[node name="VFX" type="Node2D" parent="."]
+
+[node name="ThrustParticles" type="GPUParticles2D" parent="VFX"]
+position = Vector2(-9, 0)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_wdqh0")
+texture = ExtResource("3_801gc")
+
+[node name="ThrustBackParticles" type="GPUParticles2D" parent="VFX"]
+position = Vector2(11, 0)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_44vj6")
+texture = ExtResource("3_801gc")
+
+[node name="StrafeLeftParticles" type="GPUParticles2D" parent="VFX"]
+position = Vector2(1, 4)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_pfqju")
+texture = ExtResource("3_801gc")
+
+[node name="StrafeRightParticles" type="GPUParticles2D" parent="VFX"]
+position = Vector2(1, -4)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_e7mhf")
+texture = ExtResource("3_801gc")

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx64526fnmswe"]
+
+[ext_resource type="PackedScene" uid="uid://bmaoelgfuooxi" path="res://scenes/spaceship.tscn" id="1_ucl2o"]
+[ext_resource type="PackedScene" uid="uid://d0do0ms3g0pkc" path="res://scenes/ui.tscn" id="2_b5lev"]
+[ext_resource type="PackedScene" uid="uid://h7kebcpbheqa" path="res://scenes/planet.tscn" id="3_a7wy6"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Spaceship" parent="." instance=ExtResource("1_ucl2o")]
+position = Vector2(54, 43)
+mass = 100.0
+engine_power = 5000
+spin_power = 5000
+
+[node name="UI" parent="." node_paths=PackedStringArray("spaceship") instance=ExtResource("2_b5lev")]
+spaceship = NodePath("../Spaceship")
+
+[node name="Planet" parent="." instance=ExtResource("3_a7wy6")]
+position = Vector2(199, 42)
+planet_size = 30
+color = Color(0.530956, 0.738304, 1, 1)
+mass = 500
+
+[node name="Planet2" parent="." instance=ExtResource("3_a7wy6")]
+position = Vector2(80, 197)
+planet_size = 60
+color = Color(0.976471, 0.0745098, 0.596078, 1)
+
+[node name="Planet3" parent="." instance=ExtResource("3_a7wy6")]
+position = Vector2(320, 159)
+planet_size = 40
+color = Color(0.03288, 0.0216, 0.36, 1)
+mass = 700

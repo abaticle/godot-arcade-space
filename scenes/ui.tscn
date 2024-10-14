@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0do0ms3g0pkc"]
+
+[ext_resource type="Script" path="res://scenes/ui.gd" id="1_c0v5q"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_c0v5q")
+
+[node name="Container" type="VFlowContainer" parent="."]
+offset_right = 142.0
+offset_bottom = 177.0
+
+[node name="SpeedLabel" type="Label" parent="Container"]
+layout_mode = 2
+text = "speed: "
+
+[node name="DirectionLabel" type="Label" parent="Container"]
+layout_mode = 2
+
+[node name="FPSLabel" type="Label" parent="Container"]
+layout_mode = 2
+text = "FPS: "
+
+[node name="BackgroundScale" type="Label" parent="Container"]
+layout_mode = 2
+text = "Background scale:"
+
+[node name="Zoom" type="Label" parent="Container"]
+layout_mode = 2
+
+[node name="MousePosition" type="Label" parent="Container"]
+layout_mode = 2

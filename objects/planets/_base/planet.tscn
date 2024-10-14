@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cetw0y5h601km"]
+
+[ext_resource type="Script" path="res://objects/planets/_base/planet.gd" id="1_gixnw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_myd7w"]
+resource_local_to_scene = true
+
+[node name="Planet" type="StaticBody2D" groups=["planets"]]
+script = ExtResource("1_gixnw")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+z_index = 10
+shape = SubResource("CircleShape2D_myd7w")

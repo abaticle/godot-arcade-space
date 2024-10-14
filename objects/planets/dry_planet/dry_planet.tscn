@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://cu68lfsau7ifs"]
+
+[ext_resource type="PackedScene" uid="uid://cetw0y5h601km" path="res://objects/planets/_base/planet.tscn" id="1_3fcv1"]
+[ext_resource type="Script" path="res://objects/planets/dry_planet/dry_planet.gd" id="1_tqqp1"]
+[ext_resource type="Shader" path="res://objects/planets/dry_planet/dry_planet.gdshader" id="3_47bqk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_su20p"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h5mgp"]
+resource_local_to_scene = true
+shader = ExtResource("3_47bqk")
+shader_parameter/pixels = 300.0
+shader_parameter/rotation = 0.0
+shader_parameter/light_origin = Vector2(0.39, 0.39)
+shader_parameter/light_distance1 = 0.5
+shader_parameter/light_distance2 = 0.75
+shader_parameter/time_speed = 0.2
+shader_parameter/dither_size = 2.0
+shader_parameter/colors = PackedColorArray(0.666667, 0, 0, 1, 0.827179, 0.362767, 0.0491686, 1, 0.678431, 0.184314, 0.270588, 1, 0.321569, 0.2, 0.247059, 1, 0.239216, 0.160784, 0.211765, 1)
+shader_parameter/n_colors = 5
+shader_parameter/size = 10.0
+shader_parameter/OCTAVES = 5
+shader_parameter/seed = 3.79
+shader_parameter/time = 0.0
+shader_parameter/should_dither = false
+
+[node name="DryPlanet" instance=ExtResource("1_3fcv1")]
+script = ExtResource("1_tqqp1")
+
+[node name="CollisionShape" parent="." index="0"]
+shape = SubResource("CircleShape2D_su20p")
+
+[node name="Land" type="ColorRect" parent="." index="1"]
+material = SubResource("ShaderMaterial_h5mgp")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
