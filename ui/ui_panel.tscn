@@ -1,13 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://d0do0ms3g0pkc"]
 
-[ext_resource type="Script" path="res://scenes/ui.gd" id="1_c0v5q"]
+[ext_resource type="Script" path="res://ui/ui_panel.gd" id="1_c0v5q"]
 
-[node name="UI" type="CanvasLayer"]
+[node name="UIPanel" type="PanelContainer"]
+offset_right = 172.0
+offset_bottom = 131.0
 script = ExtResource("1_c0v5q")
 
-[node name="Container" type="VFlowContainer" parent="."]
-offset_right = 142.0
-offset_bottom = 177.0
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 2
 
 [node name="SpeedLabel" type="Label" parent="Container"]
 layout_mode = 2

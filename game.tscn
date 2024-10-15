@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://bx64526fnmswe"]
+[gd_scene load_steps=14 format=3 uid="uid://bx64526fnmswe"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_isvll"]
 [ext_resource type="PackedScene" uid="uid://bmaoelgfuooxi" path="res://objects/spaceships/player_spaceship/player_spaceship.tscn" id="1_ucl2o"]
-[ext_resource type="PackedScene" uid="uid://d0do0ms3g0pkc" path="res://scenes/ui.tscn" id="2_b5lev"]
+[ext_resource type="PackedScene" uid="uid://d0do0ms3g0pkc" path="res://ui/ui_panel.tscn" id="2_b5lev"]
 [ext_resource type="Script" path="res://scripts/global_variables.gd" id="2_c1ell"]
 [ext_resource type="Shader" path="res://shaders/space.gdshader" id="2_yxis2"]
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="6_jqtc2"]
 [ext_resource type="PackedScene" uid="uid://bycp4bu4pc1o4" path="res://objects/spaceships/enemy_spaceship/enemy_spaceship.tscn" id="8_m0svf"]
 [ext_resource type="PackedScene" uid="uid://cu68lfsau7ifs" path="res://objects/planets/dry_planet/dry_planet.tscn" id="8_s0c27"]
+[ext_resource type="PackedScene" uid="uid://dferxgoptoaxl" path="res://ui/ui_debug.tscn" id="9_38jwf"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3ihjg"]
 noise_type = 0
@@ -46,7 +47,7 @@ size_flags_vertical = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
-position_smoothing_speed = 3.0
+position_smoothing_speed = 1.0
 script = ExtResource("6_jqtc2")
 
 [node name="Spaceship" parent="." node_paths=PackedStringArray("background") instance=ExtResource("1_ucl2o")]
@@ -56,8 +57,6 @@ background = NodePath("../CanvasLayer/Background")
 engine_power = 12000
 spin_power = 40000
 spaceship_mass = 80
-
-[node name="UI" parent="." instance=ExtResource("2_b5lev")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ieged")
@@ -78,3 +77,9 @@ mass = 30000
 
 [node name="EnemySpaceship" parent="." instance=ExtResource("8_m0svf")]
 position = Vector2(512, 448)
+
+[node name="UI2" type="CanvasLayer" parent="."]
+
+[node name="UIPanel" parent="UI2" instance=ExtResource("2_b5lev")]
+
+[node name="UiDebug" parent="UI2" instance=ExtResource("9_38jwf")]

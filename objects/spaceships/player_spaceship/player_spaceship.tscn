@@ -1,11 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmaoelgfuooxi"]
+[gd_scene load_steps=14 format=3 uid="uid://bmaoelgfuooxi"]
 
 [ext_resource type="Script" path="res://objects/spaceships/player_spaceship/player_spaceship.gd" id="1_rcvwh"]
 [ext_resource type="AudioStream" uid="uid://usfflyk7myq5" path="res://resources/sounds/thrust.wav" id="2_v34wj"]
 [ext_resource type="Texture2D" uid="uid://c21adw5mevvlm" path="res://resources/dust.png" id="3_801gc"]
-
-[sub_resource type="Gradient" id="Gradient_vpkqd"]
-colors = PackedColorArray(0.699653, 0.699653, 0.699653, 0.341176, 1, 1, 1, 0)
+[ext_resource type="AudioStream" uid="uid://dy36y6jijqxy8" path="res://resources/sounds/laser_shoot.wav" id="4_pgji0"]
 
 [sub_resource type="Curve" id="Curve_ahr6c"]
 min_value = -1.0
@@ -78,6 +76,9 @@ hue_variation_min = -0.24
 hue_variation_max = -0.2
 hue_variation_curve = SubResource("CurveTexture_sijl5")
 
+[sub_resource type="Gradient" id="Gradient_vpkqd"]
+colors = PackedColorArray(0.699653, 0.699653, 0.699653, 0.341176, 1, 1, 1, 0)
+
 [node name="SpaceShip" type="RigidBody2D" groups=["spaceships"]]
 position = Vector2(-1, 0)
 angular_damp = 2.0
@@ -90,19 +91,6 @@ polygon = PackedVector2Array(-7, -6, 9, 0, -7, 6)
 
 [node name="Collision" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-7, -6, 9, 0, -7, 6)
-
-[node name="DirectionLine" type="Line2D" parent="."]
-width = 1.0
-default_color = Color(1, 0.46, 0.46, 1)
-
-[node name="GravityLine" type="Line2D" parent="."]
-width = 1.0
-default_color = Color(0.421739, 0.779949, 0.973268, 1)
-
-[node name="FuturePositions" type="Line2D" parent="."]
-width = 2.0
-default_color = Color(0.65834, 0.65834, 0.65834, 1)
-gradient = SubResource("Gradient_vpkqd")
 
 [node name="ThrustSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_v34wj")
@@ -136,3 +124,24 @@ emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_e7mhf")
 texture = ExtResource("3_801gc")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(10, 0)
+
+[node name="Lines" type="Node2D" parent="."]
+
+[node name="Direction" type="Line2D" parent="Lines"]
+width = 1.0
+default_color = Color(1, 0.46, 0.46, 1)
+
+[node name="Gravity" type="Line2D" parent="Lines"]
+width = 1.0
+default_color = Color(0.421739, 0.779949, 0.973268, 1)
+
+[node name="FuturePositions" type="Line2D" parent="Lines"]
+width = 2.0
+default_color = Color(0.65834, 0.65834, 0.65834, 1)
+gradient = SubResource("Gradient_vpkqd")
+
+[node name="BulletSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_pgji0")

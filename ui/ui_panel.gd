@@ -1,15 +1,15 @@
-extends CanvasLayer
+extends PanelContainer
 
-@onready var camera = $"../Camera2D"
-@onready var spaceship = $"../Spaceship"
-@onready var game: Node2D = $"../"
+@onready var camera = $"../../Camera2D"
+@onready var spaceship = $"../../Spaceship"
+@onready var game: Node2D = $"../../"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-func vector2_to_string(vector: Vector2) -> String:
-	return str(snapped(vector.x, 0.01)) + ";" + str(snapped(vector.y, 0.01))
+func vector2_to_string(vector: Vector2, snap: float) -> String:
+	return str(snapped(vector.x, snap)) + ";" + str(snapped(vector.y, snap))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -22,4 +22,4 @@ func _process(_delta: float) -> void:
 	$"Container/FPSLabel".text = "FPS: " + str(fps)
 	$"Container/DirectionLabel".text = "Direction: " + str(spaceship_direction) + "°"
 	$"Container/Zoom".text = "Zoom: " + str(zoom)
-	$"Container/MousePosition".text = "Mouse: " + vector2_to_string(game.get_local_mouse_position())
+	$"Container/MousePosition".text = "Mouse: " + vector2_to_string(game.get_local_mouse_position(), 1)

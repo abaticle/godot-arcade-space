@@ -9,8 +9,11 @@ extends "res://objects/spaceships/_base/spaceship.gd"
 @onready var strafe_left_particles: GPUParticles2D = $"VFX/StrafeLeftParticles"
 @onready var strafe_right_particles: GPUParticles2D = $"VFX/StrafeRightParticles"
 
+@onready var bullet = preload("res://objects/weapons/bullet.tscn")
+
 var update_future_positions = true
 var future_positions: PackedVector2Array
+var lastShot:float = 0
 
 func _ready() -> void:
 	mass = spaceship_mass
@@ -63,6 +66,9 @@ func get_input():
 		strafe = transform.y * engine_power * GlobalVariables.SPACESHIP_STRAFE_MODIFIER
 		strafe_right_particles.emitting = true
 	
+	if Input.is_action_pressed("shoot_primary") && lastShot > 0.5:
+		shoot()
+	
 	var direction_to_mouse = get_global_mouse_position() - global_position
 	var desired_angle = direction_to_mouse.angle()
 	
@@ -70,24 +76,40 @@ func get_input():
 
 
 
+func shoot() -> void:
+	lastShot = 0
+	
+	var new_bullet = bullet.instantiate()
+	
+	owner.add_child(new_bullet)
+	
+	new_bullet.transform = $Muzzle.global_transform
+	var spread = 5
+	var random_angle = randf_range(spread * -1, spread)
+	new_bullet.transform.x = new_bullet.transform.x.rotated(deg_to_rad(random_angle))
+	new_bullet.damages = 10
+	new_bullet.speed = 600
+	
+	$BulletSound.play()
+
 func update_direction_line() -> void:
-	$GravityLine.clear_points()
-	$DirectionLine.clear_points()
-	$FuturePositions.clear_points()
+	$"Lines/Direction".clear_points()
+	$"Lines/Gravity".clear_points()
+	$"Lines/FuturePositions".clear_points()
 	
 	if GlobalVariables.SPACESHIP_DRAW_DIRECTION:
-		$DirectionLine.add_point(Vector2.ZERO)
-		$DirectionLine.add_point(linear_velocity)
-		$DirectionLine.global_rotation = 0
+		$"Lines/Direction".add_point(Vector2.ZERO)
+		$"Lines/Direction".add_point(linear_velocity)
+		$"Lines/Direction".global_rotation = 0
 	
 	if GlobalVariables.SPACESHIP_DRAW_GRAVITY:
-		$GravityLine.add_point(Vector2.ZERO)
-		$GravityLine.add_point(gravity_force * 0.2)
-		$GravityLine.global_rotation = 0
+		$"Lines/Gravity".add_point(Vector2.ZERO)
+		$"Lines/Gravity".add_point(gravity_force * 0.2)
+		$"Lines/Gravity".global_rotation = 0
 			
 	for future_position in future_positions:
-		$FuturePositions.add_point(position - future_position)
-	$FuturePositions.global_rotation = deg_to_rad(180)
+		$"Lines/FuturePositions".add_point(position - future_position)
+	$"Lines/FuturePositions".global_rotation = deg_to_rad(180)
 
 
 func predict_future_positions(steps: int, delta: float) -> PackedVector2Array:
@@ -144,6 +166,8 @@ func _physics_process(delta):
 	update_background()
 	
 	future_positions = predict_future_positions(GlobalVariables.SPACESHIP_MAXIMUM_FUTURE_POSITIONS, delta * GlobalVariables.SPACESHIP_FUTURE_POSITION_MUTIPLIER)
+	
+	lastShot += delta
 
 func _integrate_forces(state) -> void:
 	#pass
