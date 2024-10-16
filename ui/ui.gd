@@ -1,8 +1,12 @@
 extends PanelContainer
 
-@onready var camera = $"../../Camera2D"
-@onready var spaceship = $"../../Spaceship"
-@onready var game: Node2D = $"../../"
+#@onready var camera = $"../../Camera2D"
+#@onready var spaceship = $"../../Spaceship"
+#@onready var game: Node2D = $"../../"
+
+@export var camera: Camera2D
+@export var spaceship: RigidBody2D
+@export var game: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

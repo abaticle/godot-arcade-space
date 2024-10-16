@@ -1,5 +1,6 @@
 #extends RigidBody2D
-extends "res://objects/spaceships/_base/spaceship.gd"
+#extends "res://objects/spaceships/_base/spaceship.gd"
+class_name PlayerSpaceship extends Spaceship
 
 @export var background: ColorRect 
 
@@ -66,7 +67,7 @@ func get_input():
 		strafe = transform.y * engine_power * GlobalVariables.SPACESHIP_STRAFE_MODIFIER
 		strafe_right_particles.emitting = true
 	
-	if Input.is_action_pressed("shoot_primary") && lastShot > 0.5:
+	if Input.is_action_pressed("shoot_primary") && lastShot > 0.1:
 		shoot()
 	
 	var direction_to_mouse = get_global_mouse_position() - global_position
@@ -87,8 +88,6 @@ func shoot() -> void:
 	var spread = 5
 	var random_angle = randf_range(spread * -1, spread)
 	new_bullet.transform.x = new_bullet.transform.x.rotated(deg_to_rad(random_angle))
-	new_bullet.damages = 10
-	new_bullet.speed = 600
 	
 	$BulletSound.play()
 

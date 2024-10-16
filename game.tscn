@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game.gd" id="1_isvll"]
 [ext_resource type="PackedScene" uid="uid://bmaoelgfuooxi" path="res://objects/spaceships/player_spaceship/player_spaceship.tscn" id="1_ucl2o"]
-[ext_resource type="PackedScene" uid="uid://d0do0ms3g0pkc" path="res://ui/ui_panel.tscn" id="2_b5lev"]
+[ext_resource type="PackedScene" uid="uid://d0do0ms3g0pkc" path="res://ui/ui.tscn" id="2_b5lev"]
 [ext_resource type="Script" path="res://scripts/global_variables.gd" id="2_c1ell"]
 [ext_resource type="Shader" path="res://shaders/space.gdshader" id="2_yxis2"]
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="6_jqtc2"]
@@ -51,7 +51,7 @@ position_smoothing_speed = 1.0
 script = ExtResource("6_jqtc2")
 
 [node name="Spaceship" parent="." node_paths=PackedStringArray("background") instance=ExtResource("1_ucl2o")]
-position = Vector2(0, 0)
+position = Vector2(192, 242)
 mass = 100.0
 background = NodePath("../CanvasLayer/Background")
 engine_power = 12000
@@ -61,25 +61,32 @@ spaceship_mass = 80
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ieged")
 
-[node name="Planet1" parent="." instance=ExtResource("8_s0c27")]
-position = Vector2(136, 464)
-planet_size = 150.0
-mass = 80000
-
-[node name="Planet2" parent="." instance=ExtResource("8_s0c27")]
-position = Vector2(560, 104)
-mass = 40000
-
 [node name="Planet3" parent="." instance=ExtResource("8_s0c27")]
 position = Vector2(688, 424)
 planet_size = 80.0
 mass = 30000
 
 [node name="EnemySpaceship" parent="." instance=ExtResource("8_m0svf")]
-position = Vector2(512, 448)
+position = Vector2(437, 321)
+max_health = 50
+engine_power = 800
+spin_power = 10000
+max_speed = 200
+spaceship_mass = 10
 
-[node name="UI2" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="UIPanel" parent="UI2" instance=ExtResource("2_b5lev")]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+offset_right = 304.0
+offset_bottom = 135.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="UiDebug" parent="UI2" instance=ExtResource("9_38jwf")]
+[node name="UIPanel" parent="UI/VBoxContainer" node_paths=PackedStringArray("camera", "spaceship", "game") instance=ExtResource("2_b5lev")]
+layout_mode = 2
+camera = NodePath("../../../Camera2D")
+spaceship = NodePath("../../../Spaceship")
+game = NodePath("../../..")
+
+[node name="UiDebug" parent="UI/VBoxContainer" instance=ExtResource("9_38jwf")]
+layout_mode = 2

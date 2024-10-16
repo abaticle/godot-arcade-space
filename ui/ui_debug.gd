@@ -1,6 +1,6 @@
-extends Control
+extends PanelContainer
 
-@onready var container: VBoxContainer = $"Panel/MarginContainer/Container"
+@onready var container: VBoxContainer = $"Container"
 
 var setting_slider = preload("res://ui/components/setting_slider.tscn")
 

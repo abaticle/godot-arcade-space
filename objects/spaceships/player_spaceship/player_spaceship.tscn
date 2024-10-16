@@ -14,8 +14,8 @@ point_count = 2
 curve = SubResource("Curve_ahr6c")
 
 [sub_resource type="Curve" id="Curve_py104"]
-max_value = 2.0
-_data = [Vector2(0, 1.67033), 0.0, 0.0, 0, 0, Vector2(0.253968, 0.175824), 0.0, 0.0, 0, 0]
+max_value = 3.0
+_data = [Vector2(0, 1.54945), 0.0, 0.0, 0, 0, Vector2(0.542683, 0.395604), 0.257457, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_7oyle"]
@@ -23,10 +23,9 @@ curve = SubResource("Curve_py104")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wdqh0"]
 direction = Vector3(-1, 0, 0)
-spread = 15.0
-flatness = 0.2
-initial_velocity_min = 50.0
-initial_velocity_max = 120.0
+spread = 5.0
+flatness = 0.283
+initial_velocity_max = 40.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.2
 scale_max = 0.6
@@ -79,7 +78,7 @@ hue_variation_curve = SubResource("CurveTexture_sijl5")
 [sub_resource type="Gradient" id="Gradient_vpkqd"]
 colors = PackedColorArray(0.699653, 0.699653, 0.699653, 0.341176, 1, 1, 1, 0)
 
-[node name="SpaceShip" type="RigidBody2D" groups=["spaceships"]]
+[node name="SpaceShip" type="RigidBody2D" groups=["player", "spaceships"]]
 position = Vector2(-1, 0)
 angular_damp = 2.0
 script = ExtResource("1_rcvwh")
@@ -98,11 +97,13 @@ stream = ExtResource("2_v34wj")
 [node name="VFX" type="Node2D" parent="."]
 
 [node name="ThrustParticles" type="GPUParticles2D" parent="VFX"]
-position = Vector2(-9, 0)
-emitting = false
-amount = 20
+position = Vector2(-11, 0)
+amount = 50
+amount_ratio = 0.8
 process_material = SubResource("ParticleProcessMaterial_wdqh0")
 texture = ExtResource("3_801gc")
+lifetime = 3.0
+speed_scale = 2.0
 
 [node name="ThrustBackParticles" type="GPUParticles2D" parent="VFX"]
 position = Vector2(11, 0)

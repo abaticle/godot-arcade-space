@@ -7,6 +7,11 @@ size = Vector2(16, 16)
 
 [node name="EnemySpaceship" type="RigidBody2D" groups=["enemies", "spaceships"]]
 script = ExtResource("1_4xx3v")
+max_health = null
+engine_power = null
+spin_power = null
+max_speed = null
+spaceship_mass = null
 
 [node name="Shape" type="Polygon2D" parent="."]
 color = Color(0.793194, 0, 0.205166, 1)

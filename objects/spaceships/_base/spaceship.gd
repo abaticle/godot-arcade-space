@@ -1,4 +1,4 @@
-extends RigidBody2D
+class_name Spaceship extends RigidBody2D
 
 @export var engine_power = 800
 @export var spin_power = 10000
