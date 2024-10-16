@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv0t1ydvbx2tr"]
+
+[ext_resource type="Shader" uid="uid://x0j3cy7pkfrx" path="res://shaders/visual_shader_test.tres" id="1_kqg7e"]
+[ext_resource type="Texture2D" uid="uid://ckulkdc67t4hn" path="res://resources/test_planet.png" id="2_0p5vr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m6crb"]
+shader = ExtResource("1_kqg7e")
+
+[node name="Tests" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_m6crb")
+position = Vector2(194, 134)
+texture = ExtResource("2_0p5vr")

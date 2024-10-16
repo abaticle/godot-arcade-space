@@ -56,6 +56,7 @@ mass = 100.0
 background = NodePath("../CanvasLayer/Background")
 engine_power = 12000
 spin_power = 40000
+max_speed = null
 spaceship_mass = 80
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -68,11 +69,6 @@ mass = 30000
 
 [node name="EnemySpaceship" parent="." instance=ExtResource("8_m0svf")]
 position = Vector2(437, 321)
-max_health = 50
-engine_power = 800
-spin_power = 10000
-max_speed = 200
-spaceship_mass = 10
 
 [node name="UI" type="CanvasLayer" parent="."]
 

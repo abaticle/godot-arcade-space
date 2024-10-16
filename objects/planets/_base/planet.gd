@@ -1,4 +1,4 @@
-extends StaticBody2D
+class_name Planet extends StaticBody2D
 
 var time = 1000.0
 var override_time = false
