@@ -1,16 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://c171u643jj4e2"]
+[gd_scene load_steps=9 format=3 uid="uid://c171u643jj4e2"]
 
 [ext_resource type="Script" path="res://objects/asteroids/asteroid.gd" id="1_dpmfs"]
-[ext_resource type="Texture2D" uid="uid://8cmkts4n3j2i" path="res://resources/asteroid_0.png" id="1_hd2bt"]
+[ext_resource type="Texture2D" uid="uid://8cmkts4n3j2i" path="res://assets/asteroid_0.png" id="1_hd2bt"]
+[ext_resource type="Texture2D" uid="uid://c12nauyctn5ir" path="res://assets/asteroid_remain_0.png" id="3_uh3eg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qg054"]
-radius = 26.0768
+radius = 14.0
 
-[node name="Asteroid" type="RigidBody2D"]
+[sub_resource type="Gradient" id="Gradient_bxhel"]
+colors = PackedColorArray(0.699653, 0.699653, 0.699653, 0.341176, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_ae0hd"]
+_data = [Vector2(0.00609757, 0.835165), 0.0, 0.0, 0, 0, Vector2(1, 0.197802), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2m0od"]
+curve = SubResource("Curve_ae0hd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cdd8r"]
+direction = Vector3(0, 1, 0)
+spread = 80.0
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_2m0od")
+
+[node name="Asteroid" type="RigidBody2D" groups=["asteroids"]]
+angular_velocity = 0.0261799
 script = ExtResource("1_dpmfs")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_hd2bt")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qg054")
+
+[node name="Lines" type="Node2D" parent="."]
+
+[node name="FuturePositions" type="Line2D" parent="Lines"]
+width = 2.0
+default_color = Color(0.65834, 0.65834, 0.65834, 1)
+gradient = SubResource("Gradient_bxhel")
+
+[node name="VFX" type="Node2D" parent="."]
+
+[node name="Explosion" type="GPUParticles2D" parent="VFX"]
+position = Vector2(14, 0)
+rotation = -1.54113
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_cdd8r")
+texture = ExtResource("3_uh3eg")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0

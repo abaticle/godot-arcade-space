@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bx64526fnmswe"]
+[gd_scene load_steps=14 format=3 uid="uid://bx64526fnmswe"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_isvll"]
 [ext_resource type="PackedScene" uid="uid://bmaoelgfuooxi" path="res://objects/spaceships/player_spaceship/player_spaceship.tscn" id="1_ucl2o"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://bycp4bu4pc1o4" path="res://objects/spaceships/enemy_spaceship/enemy_spaceship.tscn" id="8_m0svf"]
 [ext_resource type="PackedScene" uid="uid://cu68lfsau7ifs" path="res://objects/planets/dry_planet/dry_planet.tscn" id="8_s0c27"]
 [ext_resource type="PackedScene" uid="uid://dferxgoptoaxl" path="res://ui/ui_debug.tscn" id="9_38jwf"]
-[ext_resource type="PackedScene" uid="uid://c171u643jj4e2" path="res://objects/asteroids/asteroid.tscn" id="10_h3rn7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3ihjg"]
 noise_type = 0
@@ -52,7 +51,7 @@ position_smoothing_speed = 1.0
 script = ExtResource("6_jqtc2")
 
 [node name="Spaceship" parent="." node_paths=PackedStringArray("background") instance=ExtResource("1_ucl2o")]
-position = Vector2(572, 416)
+position = Vector2(192, 242)
 mass = 100.0
 background = NodePath("../CanvasLayer/Background")
 engine_power = 12000
@@ -66,30 +65,6 @@ environment = SubResource("Environment_ieged")
 position = Vector2(688, 424)
 planet_size = 80.0
 mass = 30000
-
-[node name="Asteroid" parent="Planet3" instance=ExtResource("10_h3rn7")]
-position = Vector2(-243, 58)
-rotation = 3.15504
-
-[node name="Asteroid2" parent="Planet3" instance=ExtResource("10_h3rn7")]
-position = Vector2(-280, 96)
-rotation = 2.36789
-
-[node name="Asteroid3" parent="Planet3" instance=ExtResource("10_h3rn7")]
-position = Vector2(-289, 22)
-rotation = -0.17097
-
-[node name="Asteroid4" parent="Planet3" instance=ExtResource("10_h3rn7")]
-position = Vector2(-204, 67)
-rotation = 1.68352
-
-[node name="Asteroid5" parent="Planet3" instance=ExtResource("10_h3rn7")]
-position = Vector2(-241, 105)
-rotation = 1.24042
-
-[node name="Asteroid6" parent="Planet3" instance=ExtResource("10_h3rn7")]
-position = Vector2(-250, 31)
-rotation = -1.15953
 
 [node name="EnemySpaceship" parent="." instance=ExtResource("8_m0svf")]
 position = Vector2(437, 321)

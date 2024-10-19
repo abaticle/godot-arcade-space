@@ -26,7 +26,7 @@ func get_colors():
 	return get_colors_from_shader($Land.material)
 
 func set_colors(colors):
-	set_colors_on_shader($Land.material, colors)
+	set_colors_on_shader($Land.material.get_shader_parameter("color"), colors)
 
 func randomize_colors():
 	var seed_colors = _generate_new_colorscheme(5 + randi()%3, randf_range(0.3, 0.65), 1.0)

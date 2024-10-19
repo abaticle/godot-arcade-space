@@ -1,5 +1,5 @@
 class_name Planet extends StaticBody2D
-
+ 
 var time = 1000.0
 var override_time = false
 var original_colors
@@ -9,9 +9,11 @@ var original_colors
 #@export var relative_scale : float = 1.0
 #@export var gui_zoom : float = 1.0
 
+@onready var collision_shape: CollisionShape2D = $CollisionShape
+@onready var land:ColorRect = $Land
 
-@onready var collision_shape: CollisionShape2D = $"CollisionShape"
-@onready var land:ColorRect = $"Land"
+@onready var explosion = preload("res://objects/effects/explosion/explosion.tscn")
+
 
 func _ready():
 	mass *= GlobalVariables.PLANET_MASS_MULTIPLIER
@@ -21,6 +23,9 @@ func _ready():
 	# Multiply by 2 because using a radius
 	$Land.size = Vector2(planet_size*2, planet_size*2) 
 	$Land.position = collision_shape.position - Vector2(planet_size, planet_size) 
+	
+	# Set VFX colors
+	#$Land.material.g
 
 func set_collision() -> void:	
 	collision_shape.shape.radius = planet_size
@@ -61,8 +66,22 @@ func get_colors():
 func get_colors_from_shader(mat, uniform_name = "colors"):
 	return mat.get_shader_parameter(uniform_name)
 
+#TODO: Coloriser explosion
+func hit(body: Area2D) -> void: 
+	var new_explosion: GPUParticles2D = explosion.instantiate()
+	
+	add_child(new_explosion)
+	new_explosion.one_shot = true
+	new_explosion.emitting = true
+	new_explosion.global_position = body.position
+	new_explosion.rotation = 180 + get_angle_to(body.position)
+	new_explosion.process_material.color = $Land.material.get_shader_parameter("colors")[0]
+	
+	pass
+
+
 func set_colors_on_shader(mat, colors, uniform_name = "colors"):
-	mat.set_shader_parameter(uniform_name, colors)
+	pass
 
 func randomize_colors():
 	pass

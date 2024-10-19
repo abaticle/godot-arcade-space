@@ -7,6 +7,7 @@ var cursor = load("res://resources/target_cursor.png")
 
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(cursor)
-	#$Planet1.randomize_colors()
+	$Planet3.set_seed(randi_range(1, 10))
+	$Planet3.randomize_colors()
 	#$Planet1.set_seed(randi_range(1, 10))
 	#$Planet2.randomize_colors()

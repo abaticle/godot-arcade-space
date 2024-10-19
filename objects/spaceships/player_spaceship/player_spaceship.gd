@@ -75,7 +75,7 @@ func get_input():
 	
 	rotation = desired_angle
 
-func orbit(planet: Planet) -> void:
+func orbit(planet) -> void:
 	var v: Vector2
 	
 	#v = sqrt((GlobalVariables.GRAVITY_CONSTANT * planet.mass) / global_position.distance_to(planet.global_position))
@@ -94,7 +94,7 @@ func shoot() -> void:
 	var random_angle = randf_range(spread * -1, spread)
 	new_bullet.transform.x = new_bullet.transform.x.rotated(deg_to_rad(random_angle))
 	
-	$BulletSound.play()
+	#$BulletSound.play()
 
 func update_direction_line() -> void:
 	$"Lines/Direction".clear_points()

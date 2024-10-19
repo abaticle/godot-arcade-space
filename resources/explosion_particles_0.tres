@@ -1,0 +1,28 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://bllwmltu5epj3"]
+
+[sub_resource type="Curve" id="Curve_s8s3q"]
+max_value = 100.0
+_data = [Vector2(0.2, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="CurveTexture" id="CurveTexture_4mk1f"]
+curve = SubResource("Curve_s8s3q")
+
+[sub_resource type="Curve" id="Curve_t1x2l"]
+max_value = 4.0
+_data = [Vector2(0, 1.0989), 0.0, 0.0, 0, 0, Vector2(0.359756, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_b3amr"]
+curve = SubResource("Curve_t1x2l")
+
+[resource]
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+damping_max = 200.0
+damping_curve = SubResource("CurveTexture_4mk1f")
+scale_curve = SubResource("CurveTexture_b3amr")

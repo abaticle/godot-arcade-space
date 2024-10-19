@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmaoelgfuooxi"]
+[gd_scene load_steps=15 format=3 uid="uid://bmaoelgfuooxi"]
 
 [ext_resource type="Script" path="res://objects/spaceships/player_spaceship/player_spaceship.gd" id="1_rcvwh"]
-[ext_resource type="AudioStream" uid="uid://usfflyk7myq5" path="res://resources/sounds/thrust.wav" id="2_v34wj"]
-[ext_resource type="Texture2D" uid="uid://c21adw5mevvlm" path="res://resources/dust.png" id="3_801gc"]
-[ext_resource type="AudioStream" uid="uid://dy36y6jijqxy8" path="res://resources/sounds/laser_shoot.wav" id="4_pgji0"]
+[ext_resource type="AudioStream" uid="uid://usfflyk7myq5" path="res://assets/sounds/thrust.wav" id="2_v34wj"]
+[ext_resource type="Texture2D" uid="uid://c21adw5mevvlm" path="res://assets/dust_0.png" id="3_801gc"]
+[ext_resource type="AudioStream" uid="uid://dy36y6jijqxy8" path="res://assets/sounds/laser_shoot.wav" id="4_pgji0"]
+[ext_resource type="Texture2D" uid="uid://cqm5cf6ipx24d" path="res://assets/player_spaceship_0.png" id="5_c3wr5"]
 
 [sub_resource type="Curve" id="Curve_ahr6c"]
 min_value = -1.0
@@ -85,8 +86,8 @@ script = ExtResource("1_rcvwh")
 engine_power = 700
 spin_power = 1000
 
-[node name="Shape" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-7, -6, 9, 0, -7, 6)
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("5_c3wr5")
 
 [node name="Collision" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-7, -6, 9, 0, -7, 6)
@@ -142,7 +143,7 @@ default_color = Color(0.421739, 0.779949, 0.973268, 1)
 
 [node name="FuturePositions" type="Line2D" parent="Lines"]
 width = 2.0
-default_color = Color(0.65834, 0.65834, 0.65834, 1)
+default_color = Color(0.415981, 0.41598, 0.41598, 1)
 gradient = SubResource("Gradient_vpkqd")
 
 [node name="BulletSound" type="AudioStreamPlayer2D" parent="."]

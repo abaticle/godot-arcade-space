@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://kp34skv4vb5a"]
+
+[ext_resource type="Script" path="res://objects/effects/explosion/explosion.gd" id="1_3qhyg"]
+[ext_resource type="Material" uid="uid://bllwmltu5epj3" path="res://resources/explosion_particles_0.tres" id="1_h680r"]
+[ext_resource type="Texture2D" uid="uid://c12nauyctn5ir" path="res://assets/asteroid_remain_0.png" id="2_vdq47"]
+
+[node name="Explosion" type="GPUParticles2D"]
+position = Vector2(-1, 0)
+amount = 16
+process_material = ExtResource("1_h680r")
+texture = ExtResource("2_vdq47")
+lifetime = 2.0
+explosiveness = 1.0
+script = ExtResource("1_3qhyg")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

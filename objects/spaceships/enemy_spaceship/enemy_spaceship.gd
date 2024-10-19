@@ -56,17 +56,16 @@ func ai_input() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _physics_process(delta):
+func _physics_process(delta):	
 	update_gravity_force()
 	
 	#constant_force = (thrust + calculate_gravity_force(delta)) * delta * 1000
 	constant_force = thrust + strafe + gravity_force
 	constant_torque = rotation_dir * spin_power
 
-func hit(bullet):
-	var knockback = position + (Vector2.ONE * 0.01)
-	
-	apply_impulse(knockback, Vector2.ZERO)
+func hit(bullet: Area2D):
+	var force = Vector2.RIGHT.rotated(bullet.global_rotation)
+	apply_central_impulse(force * 50)
 	
 	health -= bullet.damages
 	

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c14uttx0nwpkw"]
 
 [ext_resource type="Script" path="res://objects/weapons/bullet.gd" id="1_1epy0"]
-[ext_resource type="Texture2D" uid="uid://mr614ese2r5o" path="res://resources/bullet_1.png" id="1_vc6mt"]
+[ext_resource type="Texture2D" uid="uid://dhkqywm6gmork" path="res://assets/bullet_0.png" id="2_77uwt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l37v2"]
 size = Vector2(6, 4)
@@ -10,7 +10,7 @@ size = Vector2(6, 4)
 script = ExtResource("1_1epy0")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_vc6mt")
+texture = ExtResource("2_77uwt")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
