@@ -60,13 +60,21 @@ func ai_update_rotation_dir() -> void:
 		rotation_dir = 0
 
 
+func calculate_engine_power_from_distance(current_distance) -> float:
+	var middle = ( thrust_closest + thrust_farest ) / 2
+	var new_power = (( current_distance - middle) ** 2 ) / (max_engine_power / 2)
+	
+	return new_power
+	
+
 func ai_update_thrust(delta: float) -> void:
 	if abs(angle_to_target) > deg_to_rad(30):
 		return
 	
 	var distance = (target.global_position - global_position).length()
 	
-	current_engine_power = max_engine_power
+	current_engine_power = calculate_engine_power_from_distance(distance)
+	
 	
 	if distance > 600:
 		thrust = transform.x * current_engine_power
