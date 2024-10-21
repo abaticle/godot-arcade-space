@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://becu88nh2qpww"]
+
+[ext_resource type="Script" path="res://resources/weapon_resource.gd" id="1_7wibf"]
+
+[resource]
+script = ExtResource("1_7wibf")
+weapon_name = "Gun"
+bullet_speed = 200.0
+bullet_damage = 10
+delay_per_shot = 0.5
+current_ammos = 30
+max_ammos = 100

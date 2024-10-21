@@ -1,0 +1,122 @@
+[gd_scene load_steps=12 format=3 uid="uid://b8p2yuy41jttd"]
+
+[ext_resource type="Texture2D" uid="uid://cqm5cf6ipx24d" path="res://assets/player_spaceship_0.png" id="1_u10lh"]
+[ext_resource type="Texture2D" uid="uid://c21adw5mevvlm" path="res://assets/dust_0.png" id="2_p6akn"]
+[ext_resource type="Script" path="res://scripts/debug_vector.gd" id="3_48lcq"]
+
+[sub_resource type="Curve" id="Curve_ladoq"]
+min_value = -1.0
+_data = [Vector2(0.015873, -0.626374), 0.0, 3.16484, 0, 0, Vector2(0.973545, -0.098901), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sijl5"]
+curve = SubResource("Curve_ladoq")
+
+[sub_resource type="Curve" id="Curve_2ov13"]
+max_value = 3.0
+_data = [Vector2(0, 1.54945), 0.0, 0.0, 0, 0, Vector2(0.542683, 0.395604), 0.257457, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7oyle"]
+curve = SubResource("Curve_2ov13")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nrphf"]
+direction = Vector3(-1, 0, 0)
+spread = 5.0
+flatness = 0.283
+initial_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_7oyle")
+hue_variation_min = -0.24
+hue_variation_max = -0.2
+hue_variation_curve = SubResource("CurveTexture_sijl5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qdsve"]
+spread = 15.0
+flatness = 0.2
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_7oyle")
+hue_variation_min = -0.24
+hue_variation_max = -0.2
+hue_variation_curve = SubResource("CurveTexture_sijl5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gfggj"]
+direction = Vector3(0, 1, 0)
+spread = 15.0
+flatness = 0.2
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_7oyle")
+hue_variation_min = -0.24
+hue_variation_max = -0.2
+hue_variation_curve = SubResource("CurveTexture_sijl5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mkqo2"]
+direction = Vector3(0, -1, 0)
+spread = 15.0
+flatness = 0.2
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_7oyle")
+hue_variation_min = -0.24
+hue_variation_max = -0.2
+hue_variation_curve = SubResource("CurveTexture_sijl5")
+
+[node name="Spaceship" type="RigidBody2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_u10lh")
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, -6, 9, 0, -7, 6)
+
+[node name="VFX" type="Node2D" parent="."]
+
+[node name="ThrustParticles" type="GPUParticles2D" parent="VFX"]
+position = Vector2(-11, 0)
+emitting = false
+amount = 50
+amount_ratio = 0.8
+process_material = SubResource("ParticleProcessMaterial_nrphf")
+texture = ExtResource("2_p6akn")
+lifetime = 3.0
+speed_scale = 2.0
+
+[node name="ThrustBackParticles" type="GPUParticles2D" parent="VFX"]
+position = Vector2(11, 0)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_qdsve")
+texture = ExtResource("2_p6akn")
+
+[node name="StrafeLeftParticles" type="GPUParticles2D" parent="VFX"]
+position = Vector2(1, 4)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_gfggj")
+texture = ExtResource("2_p6akn")
+
+[node name="StrafeRightParticles" type="GPUParticles2D" parent="VFX"]
+position = Vector2(1, -4)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_mkqo2")
+texture = ExtResource("2_p6akn")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(10, 0)
+
+[node name="DebugVector" type="Node2D" parent="."]
+script = ExtResource("3_48lcq")

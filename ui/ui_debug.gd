@@ -10,7 +10,7 @@ var settings = [
 ]
 
 var ranges = {
-	"GRAVITY_CONSTANT": [1, 15, 1, GlobalVariables.GRAVITY_CONSTANT]
+	"GRAVITY_CONSTANT": [1, 15, 1, Globals.GRAVITY_CONSTANT]
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -28,7 +28,7 @@ func _ready() -> void:
 		slider.get_node("Slider").value_changed.connect(_on_value_changed.bind(slider))		
 	
 func _on_value_changed(value, node):
-	GlobalVariables[node.name] = value
+	Globals[node.name] = value
 	node.get_node("Value").text = str(value)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

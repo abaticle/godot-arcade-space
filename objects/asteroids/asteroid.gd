@@ -29,7 +29,7 @@ func orbit(planet: Planet) -> void:
 	if not planet:
 		return
 
-	var v_orbit = sqrt((GlobalVariables.GRAVITY_CONSTANT * planet.mass) / global_position.distance_to(planet.global_position))
+	var v_orbit = sqrt((Globals.GRAVITY_CONSTANT * planet.mass) / global_position.distance_to(planet.global_position))
 	
 	# Applique une impulsion initiale pour simuler une orbite
 	var direction = (global_transform.origin - planet.global_transform.origin).normalized().rotated(PI / 2)
@@ -66,7 +66,7 @@ func get_gravity_force(current_position: Vector2) -> Vector2:
 	var distance_squared = distance.length_squared()
 	
 	if distance_squared > 0.1: 
-		force += distance.normalized() * GlobalVariables.GRAVITY_CONSTANT * parent_planet.mass / distance_squared	
+		force += distance.normalized() * Globals.GRAVITY_CONSTANT * parent_planet.mass / distance_squared	
 
 	return force
 	

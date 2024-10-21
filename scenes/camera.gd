@@ -5,7 +5,7 @@ extends Camera2D
 @export var zoom_duration := 0.2
 @export var availables_zooms = [0.6, 1, 1.5]
 
-@onready var spaceship = $"../Spaceship"
+@onready var player_spaceship = $"../PlayerSpaceship"
 @onready var background:ColorRect = $"../CanvasLayer/Background"
 
 func create_zoom_tween() -> Tween:
@@ -27,7 +27,7 @@ func update_zoom(increase: bool) -> void:
 		current_zoom = availables_zooms[index]
 		create_zoom_tween().tween_property(self, "zoom", Vector2(current_zoom, current_zoom), zoom_duration)
 
-	if GlobalVariables.DEBUG_CAMERA_ZOOM:	
+	if Globals.DEBUG_CAMERA_ZOOM:	
 		print("New zoom %f" % current_zoom)
 		
 func _unhandled_input(event):
@@ -37,7 +37,7 @@ func _unhandled_input(event):
 		update_zoom(false)
 
 func _process(_delta: float) -> void:
-	position = get_global_mouse_position() #spaceship.position
-	var camera_position = spaceship.position + (get_global_mouse_position() - spaceship.position) * 0.4
+	position = get_global_mouse_position() #player_spaceship.position
+	var camera_position = player_spaceship.position + (get_global_mouse_position() - player_spaceship.position) * 0.4
 	position = camera_position
 	pass

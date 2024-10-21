@@ -16,7 +16,7 @@ var original_colors
 
 
 func _ready():
-	mass *= GlobalVariables.PLANET_MASS_MULTIPLIER
+	mass *= Globals.PLANET_MASS_MULTIPLIER
 	set_collision()
 	original_colors = get_colors()
 	
@@ -66,7 +66,6 @@ func get_colors():
 func get_colors_from_shader(mat, uniform_name = "colors"):
 	return mat.get_shader_parameter(uniform_name)
 
-#TODO: Coloriser explosion
 func hit(body: Area2D) -> void: 
 	var new_explosion: GPUParticles2D = explosion.instantiate()
 	

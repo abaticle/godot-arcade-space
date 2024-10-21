@@ -6,23 +6,17 @@ class_name Spaceship extends RigidBody2D
 @export var spaceship_mass = 10
 
 @onready var planets: Array[Node] = get_tree().get_nodes_in_group("planets")
+@onready var thrust_particles: GPUParticles2D = $VFX/ThrustParticles
+@onready var thrust_back_particles: GPUParticles2D = $VFX/ThrustBackParticles
+@onready var strafe_left_particles: GPUParticles2D = $VFX/StrafeLeftParticles
+@onready var strafe_right_particles: GPUParticles2D = $VFX/StrafeRightParticles
+
 
 var thrust = Vector2.ZERO
 var strafe = Vector2.ZERO
 var rotation_dir = 0
 var gravity_force = Vector2.ZERO
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-func _physics_process(delta):
-	update_gravity_force()
-	
-	constant_force = thrust + strafe + gravity_force
-	constant_torque = rotation_dir * spin_power
 
 
 func _ready() -> void:
@@ -36,7 +30,7 @@ func get_gravity_force(current_position: Vector2) -> Vector2:
 		var distance = planet.global_transform.origin - current_position
 		var distance_squared = distance.length_squared()
 		if distance_squared > 0.1: 
-			force += distance.normalized() * GlobalVariables.GRAVITY_CONSTANT * planet.mass * spaceship_mass / distance_squared	
+			force += distance.normalized() * Globals.GRAVITY_CONSTANT * planet.mass * spaceship_mass / distance_squared	
 	
 	return force
 
@@ -49,3 +43,22 @@ func is_position_inside_planet(current_position: Vector2) -> bool:
 
 func update_gravity_force() -> void:
 	gravity_force = get_gravity_force(global_transform.origin)
+
+
+func play_vfx() -> void:
+	
+	thrust_particles.emitting = false	
+	thrust_back_particles.emitting = false	
+	strafe_left_particles.emitting = false	
+	strafe_right_particles.emitting = false	
+		
+	if thrust.x > 0:
+		thrust_particles.emitting = true
+	if thrust.x < 0:
+		thrust_back_particles.emitting = true
+	if strafe.y > 0:
+		strafe_left_particles.emitting = true
+	if strafe.y < 0:
+		strafe_right_particles.emitting = true
+	
+	

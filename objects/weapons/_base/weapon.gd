@@ -1,4 +1,4 @@
-extends Node2D
+class_name Weapon
 
 @export var delay_per_shot: float = 0.5
 @export var damage: int = 50

@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="space-gravity-tests"
-run/main_scene="res://game.tscn"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.PNG"
 
 [autoload]
 
-GlobalVariables="*res://scripts/global_variables.gd"
+Globals="*res://scripts/globals.gd"
 
 [display]
 
@@ -25,6 +25,23 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://assets/": "red",
+"res://objects/": "green",
+"res://resources/": "blue",
+"res://scenes/": "gray",
+"res://scripts/": "gray",
+"res://shaders/": "gray",
+"res://ui/": "gray"
+}
 
 [global_group]
 

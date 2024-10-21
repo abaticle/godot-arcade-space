@@ -16,3 +16,17 @@ extends Node
 
 @export_group("Camera")
 @export var DEBUG_CAMERA_ZOOM = false
+
+
+var display_value_check = false
+
+func display_value(name: String, value: Variant) -> void:
+	var debug_variable = get_tree().get_root().find_child("DebugVariables", true, false)
+	
+	if debug_variable == null && !display_value_check:
+		print("DebugVariable not set in current scene !")
+		display_value_check = true
+		return
+		
+		
+	debug_variable.update(name, value)

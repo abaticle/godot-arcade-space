@@ -1,15 +1,9 @@
-#extends RigidBody2D
-#extends "res://objects/spaceships/_base/spaceship.gd"
 class_name PlayerSpaceship extends Spaceship
 
 @export var background: ColorRect 
+@export var current_weapon: WeaponResource
 
 @onready var thrust_sound: AudioStreamPlayer = $ThrustSound
-@onready var thrust_particles: GPUParticles2D = $"VFX/ThrustParticles"
-@onready var thrust_back_particles: GPUParticles2D = $"VFX/ThrustBackParticles"
-@onready var strafe_left_particles: GPUParticles2D = $"VFX/StrafeLeftParticles"
-@onready var strafe_right_particles: GPUParticles2D = $"VFX/StrafeRightParticles"
-
 @onready var bullet = preload("res://objects/weapons/bullet.tscn")
 
 var update_future_positions = true
@@ -40,10 +34,10 @@ func get_input():
 		"strafe_right"
 	]
 
-	thrust_particles.emitting = false	
-	thrust_back_particles.emitting = false	
-	strafe_left_particles.emitting = false	
-	strafe_right_particles.emitting = false	
+	#thrust_particles.emitting = false	
+	#thrust_back_particles.emitting = false	
+	#strafe_left_particles.emitting = false	
+	#strafe_right_particles.emitting = false	
 	
 	for action in thrust_actions:
 		if Input.is_action_just_released(action):
@@ -53,19 +47,19 @@ func get_input():
 		
 	if Input.is_action_pressed("thrust"):
 		thrust = transform.x * engine_power
-		thrust_particles.emitting = true
+		#thrust_particles.emitting = true
 	
 	if Input.is_action_pressed("thrust_back"):
 		thrust = -transform.x * engine_power
-		thrust_back_particles.emitting = true
+		#thrust_back_particles.emitting = true
 	
 	if Input.is_action_pressed("strafe_left"):
-		strafe = -transform.y * engine_power * GlobalVariables.SPACESHIP_STRAFE_MODIFIER
-		strafe_left_particles.emitting = true
+		strafe = -transform.y * engine_power * Globals.SPACESHIP_STRAFE_MODIFIER
+		#strafe_left_particles.emitting = true
 	
 	if Input.is_action_pressed("strafe_right"):
-		strafe = transform.y * engine_power * GlobalVariables.SPACESHIP_STRAFE_MODIFIER
-		strafe_right_particles.emitting = true
+		strafe = transform.y * engine_power * Globals.SPACESHIP_STRAFE_MODIFIER
+		#strafe_right_particles.emitting = true
 	
 	if Input.is_action_pressed("shoot_primary") && lastShot > 0.1:
 		shoot()
@@ -75,11 +69,6 @@ func get_input():
 	
 	rotation = desired_angle
 
-func orbit(planet) -> void:
-	var v: Vector2
-	
-	#v = sqrt((GlobalVariables.GRAVITY_CONSTANT * planet.mass) / global_position.distance_to(planet.global_position))
-		
 	
 
 func shoot() -> void:
@@ -97,20 +86,7 @@ func shoot() -> void:
 	#$BulletSound.play()
 
 func update_direction_line() -> void:
-	$"Lines/Direction".clear_points()
-	$"Lines/Gravity".clear_points()
 	$"Lines/FuturePositions".clear_points()
-	
-	if GlobalVariables.SPACESHIP_DRAW_DIRECTION:
-		$"Lines/Direction".add_point(Vector2.ZERO)
-		$"Lines/Direction".add_point(linear_velocity)
-		$"Lines/Direction".global_rotation = 0
-	
-	if GlobalVariables.SPACESHIP_DRAW_GRAVITY:
-		$"Lines/Gravity".add_point(Vector2.ZERO)
-		$"Lines/Gravity".add_point(gravity_force * 0.2)
-		$"Lines/Gravity".global_rotation = 0
-			
 	for future_position in future_positions:
 		$"Lines/FuturePositions".add_point(position - future_position)
 	$"Lines/FuturePositions".global_rotation = deg_to_rad(180)
@@ -162,6 +138,8 @@ func _physics_process(delta):
 	update_gravity_force()
 	get_input()
 	
+	super.play_vfx()
+	
 	#constant_force = (thrust + calculate_gravity_force(delta)) * delta * 1000
 	constant_force = thrust + strafe + gravity_force
 	constant_torque = rotation_dir * spin_power
@@ -169,7 +147,7 @@ func _physics_process(delta):
 	update_direction_line()
 	update_background()
 	
-	future_positions = predict_future_positions(GlobalVariables.SPACESHIP_MAXIMUM_FUTURE_POSITIONS, delta * GlobalVariables.SPACESHIP_FUTURE_POSITION_MUTIPLIER)
+	future_positions = predict_future_positions(Globals.SPACESHIP_MAXIMUM_FUTURE_POSITIONS, delta * Globals.SPACESHIP_FUTURE_POSITION_MUTIPLIER)
 	
 	lastShot += delta
 

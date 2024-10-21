@@ -5,6 +5,11 @@ var damages = 30
 var life_time_max = 200
 var life_time = 0
 
+
+func shoot():
+	pass
+
+
 func _physics_process(delta):
 	life_time += delta
 	
@@ -12,7 +17,8 @@ func _physics_process(delta):
 		queue_free()
 		
 	position += transform.x * speed * delta	
-	
+
+
 func _on_Bullet_body_entered(body: Node):
 	if body.is_in_group("bullets"):
 		pass

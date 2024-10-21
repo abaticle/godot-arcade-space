@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ioew1jteu50q"]
+
+[ext_resource type="Script" path="res://scripts/debug_variables.gd" id="1_d60yq"]
+
+[node name="DebugVariables" type="PanelContainer"]
+offset_right = 172.0
+offset_bottom = 131.0
+script = ExtResource("1_d60yq")
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 2

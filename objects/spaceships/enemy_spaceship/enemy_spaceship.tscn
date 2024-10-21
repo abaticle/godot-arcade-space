@@ -1,18 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bycp4bu4pc1o4"]
+[gd_scene load_steps=4 format=3 uid="uid://buajiwsht23d1"]
 
 [ext_resource type="Script" path="res://objects/spaceships/enemy_spaceship/enemy_spaceship.gd" id="1_4xx3v"]
+[ext_resource type="PackedScene" uid="uid://b8p2yuy41jttd" path="res://objects/spaceships/_base/spaceship.tscn" id="1_wbehs"]
+[ext_resource type="Texture2D" uid="uid://bwq6nen2l7w6x" path="res://assets/enemy_spaceship_0.png" id="2_f4vap"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7iic"]
-size = Vector2(16, 16)
-
-[node name="EnemySpaceship" type="RigidBody2D" groups=["enemies", "spaceships"]]
+[node name="EnemySpaceship" groups=["enemies", "spaceships"] instance=ExtResource("1_wbehs")]
 script = ExtResource("1_4xx3v")
 
-[node name="Shape" type="Polygon2D" parent="."]
-color = Color(0.793194, 0, 0.205166, 1)
-polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 4, 0, 8, -8)
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_f4vap")
 
-[node name="Collision" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_q7iic")
-
-[node name="VFX" type="Node2D" parent="."]
+[node name="Collision" parent="." index="1"]
+polygon = PackedVector2Array(-7, -7, 8, -7, 8, 7, -7, 7)
