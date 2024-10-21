@@ -1,8 +1,13 @@
 class_name EnemySpaceship extends Spaceship
 
-@export var max_health: int = 50
-@export var attack_radius = 1000
+
+@export_category("Enemy spaceship")
 @export var detection_radius = 500
+@export var attack_radius = 1000
+@export var thrust_curve: Curve
+@export var thrust_closest: int = 400
+@export var thrust_farest: int = 800
+
 
 enum State { IDLE, SEEK, ATTACK }
 
@@ -23,8 +28,6 @@ func _physics_process(delta):
 	
 	super.play_vfx()
 	
-	#constant_force = (thrust + calculate_gravity_force(delta)) * delta * 1000
-	#constant_force = thrust + gravity_force
 	constant_torque = rotation_dir * spin_power
 	constant_force = thrust + gravity_force
 	
@@ -38,7 +41,6 @@ func _physics_process(delta):
 func _ready() -> void:
 	$DebugVector.add("target", Color.YELLOW, Vector2.ZERO)
 	$DebugVector.add("direction", Color.SKY_BLUE, Vector2.ZERO)
-	
 	
 	health = max_health
 	target = get_target()
@@ -58,22 +60,22 @@ func ai_update_rotation_dir() -> void:
 		rotation_dir = 0
 
 
-func ai_update_thrust() -> void:
-	#TODO: Gérer IA thrust
-	
+func ai_update_thrust(delta: float) -> void:
 	if abs(angle_to_target) > deg_to_rad(30):
 		return
 	
 	var distance = (target.global_position - global_position).length()
 	
-	#Globals.display_value("transform_x", transform.x)
-	#Globals.display_value("distance", distance)
+	current_engine_power = max_engine_power
 	
-	if distance > 400:
-		thrust = transform.x * engine_power
+	if distance > 600:
+		thrust = transform.x * current_engine_power
 	else:
-		thrust = transform.x * engine_power * -1
-		#thrust = Vector2.ZERO
+		thrust = transform.x * -current_engine_power
+		
+	Globals.display_value("enemy_thrust", thrust)
+	Globals.display_value("enemy_distance", distance)
+		
 	direction_to_target = (target.global_position - global_position).normalized()
 
 
@@ -88,7 +90,7 @@ func ai_input(delta: float) -> void:
 		State.SEEK:
 			if target:
 				ai_update_rotation_dir()
-				ai_update_thrust()
+				ai_update_thrust(delta)
 				Globals.display_value("angle_to_target", rad_to_deg(angle_to_target))
 			else:
 				state = State.IDLE

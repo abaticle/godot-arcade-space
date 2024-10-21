@@ -72,3 +72,4 @@ background = NodePath("../CanvasLayer/Background")
 
 [node name="EnemySpaceship" parent="." instance=ExtResource("8_m0svf")]
 position = Vector2(572, 231)
+max_engine_power = 200

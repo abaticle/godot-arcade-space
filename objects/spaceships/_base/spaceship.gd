@@ -1,6 +1,8 @@
 class_name Spaceship extends RigidBody2D
 
-@export var engine_power = 800
+
+@export var max_health: int = 50
+@export var max_engine_power: int = 800
 @export var spin_power = 10000
 @export var max_speed = 200
 @export var spaceship_mass = 10
@@ -11,7 +13,7 @@ class_name Spaceship extends RigidBody2D
 @onready var strafe_left_particles: GPUParticles2D = $VFX/StrafeLeftParticles
 @onready var strafe_right_particles: GPUParticles2D = $VFX/StrafeRightParticles
 
-
+var current_engine_power: int = 0
 var thrust = Vector2.ZERO
 var strafe = Vector2.ZERO
 var rotation_dir = 0

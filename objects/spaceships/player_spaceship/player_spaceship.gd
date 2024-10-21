@@ -1,5 +1,6 @@
 class_name PlayerSpaceship extends Spaceship
 
+@export_category("Player spaceship")
 @export var background: ColorRect 
 @export var current_weapon: WeaponResource
 
@@ -44,21 +45,23 @@ func get_input():
 			thrust_sound.stop()		
 		if Input.is_action_pressed(action) && !thrust_sound.playing:
 			thrust_sound.play()
-		
+	
+	current_engine_power = max_engine_power
+	
 	if Input.is_action_pressed("thrust"):
-		thrust = transform.x * engine_power
+		thrust = transform.x * current_engine_power
 		#thrust_particles.emitting = true
 	
 	if Input.is_action_pressed("thrust_back"):
-		thrust = -transform.x * engine_power
+		thrust = -transform.x * current_engine_power
 		#thrust_back_particles.emitting = true
 	
 	if Input.is_action_pressed("strafe_left"):
-		strafe = -transform.y * engine_power * Globals.SPACESHIP_STRAFE_MODIFIER
+		strafe = -transform.y * current_engine_power * Globals.SPACESHIP_STRAFE_MODIFIER
 		#strafe_left_particles.emitting = true
 	
 	if Input.is_action_pressed("strafe_right"):
-		strafe = transform.y * engine_power * Globals.SPACESHIP_STRAFE_MODIFIER
+		strafe = transform.y * current_engine_power * Globals.SPACESHIP_STRAFE_MODIFIER
 		#strafe_right_particles.emitting = true
 	
 	if Input.is_action_pressed("shoot_primary") && lastShot > 0.1:
